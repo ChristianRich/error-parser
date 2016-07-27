@@ -5,7 +5,7 @@ Parses error messages of unknown format into native JavaScript Error objects.
 
 This is useful when receiving error responses from 3rd party APIs, modules or services where you have no control over what error messages contain, their data type and format.  
 
-This helper guarantees to return a well formatted Error object by analysing the data type and structure of the error object and will alwayd return error.message and error.statusCode.  
+This helper guarantees to return a well formatted Error object by analysing the data type and structure of the error object and promises to return error.message and error.statusCode.  
 
 If an error cannot be analysed a 500 Internal Server Error is returned.
 

@@ -14,18 +14,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ChristianRich/error-parser.git"
+    "url": "git+https://github.com/ChristianRich/node-error-parser.git"
   },
   "keywords": [
     "error",
-    "formatting"
+    "error formatting",
+    "error handling",
+    "error parsing"
   ],
   "author": "Christian Rich <christianrich.me@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ChristianRich/error-parser/issues"
+    "url": "https://github.com/ChristianRich/node-error-parser/issues"
   },
-  "homepage": "https://github.com/ChristianRich/error-parser#readme",
+  "homepage": "https://github.com/ChristianRich/node-error-parser#readme",
   "dependencies": {
     "lodash": "^4.14.0"
   },
