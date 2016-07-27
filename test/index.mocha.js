@@ -225,6 +225,21 @@ describe('error formatter', function() {
         done();
     });
 
+    it('should return 404: Not Found (passing in an Error object variant d)', function(done){
+
+        var message = 'This is a custom 404 error message',
+            statusCode = 404,
+            realError = new Error(message),
+            e;
+
+        realError.statusCode = statusCode;
+        e = error.create(realError);
+
+        assert(e.message === message);
+        assert(e.statusCode === statusCode);
+        done();
+    });
+
     describe('passing in invalid arguments', function() {
 
         it('should return 500: Internal Server Error (missing arg)', function(done){
