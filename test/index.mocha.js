@@ -8,7 +8,7 @@ describe('error formatter', function() {
 
         var message = 'Generic 400',
             statusCode = 400,
-            e = error.parse(message);
+            e = error.create(message);
 
         assert(e.message === message);
         assert(e.statusCode === statusCode);
@@ -19,7 +19,7 @@ describe('error formatter', function() {
 
         var message = 'Generic 500',
             statusCode = 500,
-            e = error.parse(message);
+            e = error.create(message);
 
         assert(e.message === message);
         assert(e.statusCode === statusCode);
@@ -29,10 +29,20 @@ describe('error formatter', function() {
     it('should return 500: Bad robot!', function(done){
 
         var message = 'Bad robot!',
-            e = error.parse({message: message});
+            e = error.create({message: message});
 
         assert(e.message === message);
         assert(e.statusCode === 500);
+        done();
+    });
+
+    it('should return 402: Bad robot!', function(done){
+
+        var message = 'Bad robot!',
+            e = error.create(402, message);
+
+        assert(e.message === message);
+        assert(e.statusCode === 402);
         done();
     });
 
@@ -40,7 +50,7 @@ describe('error formatter', function() {
 
         var message = 'You shall not pass!',
             statusCode = 403,
-            e = error.parse({message: message, statusCode: statusCode});
+            e = error.create({message: message, statusCode: statusCode});
 
         assert(e.message === message);
         assert(e.statusCode === statusCode);
@@ -51,7 +61,18 @@ describe('error formatter', function() {
 
         var message = 'You shall not pass!',
             statusCode = 403,
-            e = error.parse({message: message, status: statusCode});
+            e = error.create({message: message, status: statusCode});
+
+        assert(e.message === message);
+        assert(e.statusCode === statusCode);
+        done();
+    });
+
+    it('should return 403: You shall not pass! (param variation)', function(done){
+
+        var message = 'You shall not pass!',
+            statusCode = 403,
+            e = error.create({message: message, errorCode: statusCode});
 
         assert(e.message === message);
         assert(e.statusCode === statusCode);
@@ -61,7 +82,7 @@ describe('error formatter', function() {
     it('should return 404: Not found (statusCode as number)', function(done){
 
         var statusCode = 404,
-            e = error.parse(statusCode);
+            e = error.create(statusCode);
 
         assert(e.message === http.STATUS_CODES[statusCode]);
         assert(e.statusCode === 404);
@@ -71,7 +92,7 @@ describe('error formatter', function() {
     it('should return 404: Not found (statusCode as string)', function(done){
 
         var statusCode = '404',
-            e = error.parse(statusCode);
+            e = error.create(statusCode);
 
         assert(e.message === http.STATUS_CODES[statusCode]);
         assert(e.statusCode === 404);
@@ -80,7 +101,7 @@ describe('error formatter', function() {
 
     it('should return 500: Internal Server Error (passing invalid HTTP status code and no message)', function(done){
 
-        var e = error.parse(900);
+        var e = error.create(900);
 
         assert(e.message === http.STATUS_CODES[500]);
         assert(e.statusCode === 500);
@@ -89,7 +110,7 @@ describe('error formatter', function() {
 
     it('should return 500: Internal Server Error (passing invalid object keys)', function(done){
 
-        var e = error.parse({boo: 'hello', baa: 'scooter'});
+        var e = error.create({boo: 'hello', baa: 'scooter'});
 
         assert(e.message === http.STATUS_CODES[500]);
         assert(e.statusCode === 500);
@@ -98,7 +119,7 @@ describe('error formatter', function() {
 
     it('should return 500: Internal Server Error (passing in an array)', function(done){
 
-        var e = error.parse([]);
+        var e = error.create([]);
 
         assert(e.message === http.STATUS_CODES[500]);
         assert(e.statusCode === 500);
@@ -108,7 +129,7 @@ describe('error formatter', function() {
     it('should return 500: Some bad error bro (passing in an array with a string at index 0)', function(done){
 
         var message = 'Some bad error bro',
-            e = error.parse([message]);
+            e = error.create([message]);
 
         assert(e.message === message);
         assert(e.statusCode === 500);
@@ -118,7 +139,7 @@ describe('error formatter', function() {
     it('should return 500: Some bad error bro (passing in an object with key "error"', function(done){
 
         var message = 'Some bad error bro',
-            e = error.parse({error: message});
+            e = error.create({error: message});
 
         assert(e.message === message);
         assert(e.statusCode === 500);
@@ -128,7 +149,7 @@ describe('error formatter', function() {
     it('should return 503: Service Unavailable (passing in an error code without a message', function(done){
 
         var statusCode = 503,
-            e = error.parse({code: statusCode});
+            e = error.create({code: statusCode});
 
         assert(e.message === http.STATUS_CODES[statusCode]);
         assert(e.statusCode === statusCode);
@@ -138,7 +159,7 @@ describe('error formatter', function() {
     it('should return 503: Service Unavailable (passing in an error code without a message (param variation a)', function(done){
 
         var statusCode = 503,
-            e = error.parse({statusCode: statusCode});
+            e = error.create({statusCode: statusCode});
 
         assert(e.message === http.STATUS_CODES[statusCode]);
         assert(e.statusCode === statusCode);
@@ -148,7 +169,7 @@ describe('error formatter', function() {
     it('should return 503: Service Unavailable (passing in an error code without a message (param variation b)', function(done){
 
         var statusCode = 503,
-            e = error.parse({status: statusCode});
+            e = error.create({status: statusCode});
 
         assert(e.message === http.STATUS_CODES[statusCode]);
         assert(e.statusCode === statusCode);
@@ -163,7 +184,7 @@ describe('error formatter', function() {
 
         realError.statusCode = statusCode;
 
-        e = error.parse(realError);
+        e = error.create(realError);
 
         assert(e.message === http.STATUS_CODES[statusCode]);
         assert(e.statusCode === statusCode);
@@ -178,7 +199,7 @@ describe('error formatter', function() {
 
         realError.status = statusCode;
 
-        e = error.parse(realError);
+        e = error.create(realError);
 
         assert(e.message === http.STATUS_CODES[statusCode]);
         assert(e.statusCode === statusCode);
@@ -187,7 +208,7 @@ describe('error formatter', function() {
 
     it('should return 505: Internal Server Error (passing in an Error object variant b)', function(done){
 
-        var e = error.parse(new Error());
+        var e = error.create(new Error());
 
         assert(e.message === http.STATUS_CODES[500]);
         assert(e.statusCode === 500);
@@ -197,7 +218,7 @@ describe('error formatter', function() {
     it('should return 505: Internal Server Error (passing in an Error object variant c)', function(done){
 
         var message = 'Bad error',
-            e = error.parse(new Error(message));
+            e = error.create(new Error(message));
 
         assert(e.message === message);
         assert(e.statusCode === 500);
@@ -207,42 +228,42 @@ describe('error formatter', function() {
     describe('passing in invalid arguments', function() {
 
         it('should return 505: Internal Server Error (missing arg)', function(done){
-            var e = error.parse();
+            var e = error.create();
             assert(e.message === http.STATUS_CODES[500]);
             assert(e.statusCode === 500);
             done();
         });
 
         it('should return 505: Internal Server Error (undefined)', function(done){
-            var e = error.parse(undefined);
+            var e = error.create(undefined);
             assert(e.message === http.STATUS_CODES[500]);
             assert(e.statusCode === 500);
             done();
         });
 
         it('should return 505: Internal Server Error (NaN)', function(done){
-            var e = error.parse(NaN);
+            var e = error.create(NaN);
             assert(e.message === http.STATUS_CODES[500]);
             assert(e.statusCode === 500);
             done();
         });
 
         it('should return 505: Internal Server Error (Infinity)', function(done){
-            var e = error.parse(Infinity);
+            var e = error.create(Infinity);
             assert(e.message === http.STATUS_CODES[500]);
             assert(e.statusCode === 500);
             done();
         });
 
         it('should return 505: Internal Server Error (false)', function(done){
-            var e = error.parse(false);
+            var e = error.create(false);
             assert(e.message === http.STATUS_CODES[500]);
             assert(e.statusCode === 500);
             done();
         });
 
         it('should return 505: Internal Server Error (true)', function(done){
-            var e = error.parse(false);
+            var e = error.create(false);
             assert(e.message === http.STATUS_CODES[500]);
             assert(e.statusCode === 500);
             done();

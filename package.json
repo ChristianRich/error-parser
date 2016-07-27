@@ -1,6 +1,6 @@
 {
   "name": "node-error-formatter",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Node.js error formatter module capable of interpreting any kind of error into a well formatted Error object",
   "main": "index.js",
   "files": [

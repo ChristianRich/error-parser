@@ -8,7 +8,7 @@ module.exports = {
      * @param {*=} arg2 {string} message
      * @return {Error}
      */
-    parse: function(arg1, arg2){
+    create: function(arg1, arg2){
 
         var message,
             statusCode;
@@ -21,6 +21,10 @@ module.exports = {
         else if(arg1){
             statusCode = getStatusCode(arg1);
             message = getMessage(arg1);
+        }
+
+        else if(arg2){
+            message = getMessage(arg2);
         }
 
         if(statusCode && !message){
@@ -67,6 +71,10 @@ var getStatusCode = function(arg){
 
         else if(_.isNumber(arg.code)){
             statusCode = arg.code;
+        }
+
+        else if(_.isNumber(arg.errorCode)){
+            statusCode = arg.errorCode;
         }
     }
 
