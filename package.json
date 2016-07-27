@@ -1,0 +1,35 @@
+{
+  "name": "node-error-formatter",
+  "version": "1.0.0",
+  "description": "Node.js error formatter module capable of interpreting any kind of error into a well formatted Error object",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChristianRich/error-parser.git"
+  },
+  "keywords": [
+    "error",
+    "formatting"
+  ],
+  "author": "Christian Rich <christianrich.me@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChristianRich/error-parser/issues"
+  },
+  "homepage": "https://github.com/ChristianRich/error-parser#readme",
+  "dependencies": {
+    "lodash": "^4.14.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.5.3"
+  }
+}
