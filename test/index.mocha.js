@@ -206,7 +206,7 @@ describe('error formatter', function() {
         done();
     });
 
-    it('should return 505: Internal Server Error (passing in an Error object variant b)', function(done){
+    it('should return 500: Internal Server Error (passing in an Error object variant b)', function(done){
 
         var e = error.create(new Error());
 
@@ -215,7 +215,7 @@ describe('error formatter', function() {
         done();
     });
 
-    it('should return 505: Internal Server Error (passing in an Error object variant c)', function(done){
+    it('should return 500: Internal Server Error (passing in an Error object variant c)', function(done){
 
         var message = 'Bad error',
             e = error.create(new Error(message));
@@ -227,42 +227,42 @@ describe('error formatter', function() {
 
     describe('passing in invalid arguments', function() {
 
-        it('should return 505: Internal Server Error (missing arg)', function(done){
+        it('should return 500: Internal Server Error (missing arg)', function(done){
             var e = error.create();
             assert(e.message === http.STATUS_CODES[500]);
             assert(e.statusCode === 500);
             done();
         });
 
-        it('should return 505: Internal Server Error (undefined)', function(done){
+        it('should return 500: Internal Server Error (undefined)', function(done){
             var e = error.create(undefined);
             assert(e.message === http.STATUS_CODES[500]);
             assert(e.statusCode === 500);
             done();
         });
 
-        it('should return 505: Internal Server Error (NaN)', function(done){
+        it('should return 500: Internal Server Error (NaN)', function(done){
             var e = error.create(NaN);
             assert(e.message === http.STATUS_CODES[500]);
             assert(e.statusCode === 500);
             done();
         });
 
-        it('should return 505: Internal Server Error (Infinity)', function(done){
+        it('should return 500: Internal Server Error (Infinity)', function(done){
             var e = error.create(Infinity);
             assert(e.message === http.STATUS_CODES[500]);
             assert(e.statusCode === 500);
             done();
         });
 
-        it('should return 505: Internal Server Error (false)', function(done){
+        it('should return 500: Internal Server Error (false)', function(done){
             var e = error.create(false);
             assert(e.message === http.STATUS_CODES[500]);
             assert(e.statusCode === 500);
             done();
         });
 
-        it('should return 505: Internal Server Error (true)', function(done){
+        it('should return 500: Internal Server Error (true)', function(done){
             var e = error.create(false);
             assert(e.message === http.STATUS_CODES[500]);
             assert(e.statusCode === 500);
