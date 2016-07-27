@@ -1,4 +1,4 @@
-# node-error-parser  
+# Node Error Formatter
 Node.js error handling module capable of interpreting any kind of error into a well formatted Error object.
 
 Parses error messages of unknown format into native JavaScript Error objects.  
@@ -11,7 +11,7 @@ If an error cannot be analysed a 500 Internal Server Error is returned.
 
 ## Example  
 ```javascript
-var error = require('node-error-parser')  
+var error = require('node-error-formatter')  
     , someService = require('someService');  
     
 someService.doSomething()
@@ -31,7 +31,7 @@ someService.doSomething()
     });
 ```    
 ### install  
-`npm install node-error-parser --save`
+`npm install node-error-formatter --save`
 
 ### test  
 `npm test`

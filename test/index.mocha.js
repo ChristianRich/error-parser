@@ -2,7 +2,7 @@ var assert = require('assert')
     , error = require('../index')
     , http = require('http');
 
-describe('error parser', function() {
+describe('error formatter', function() {
 
     it('should return 400: Generic 400', function(done){
 
