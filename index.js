@@ -40,7 +40,7 @@ module.exports = {
         }
 
         var error = new Error(message || (http.STATUS_CODES[statusCode || 500]));
-            error.statusCode = statusCode || 500;
+            error.statusCode = error.status = error.code = statusCode || 500;
 
         return error;
     }
