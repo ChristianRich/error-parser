@@ -284,4 +284,15 @@ describe('error formatter', function() {
             done();
         });
     });
+
+    describe('Check status code', function() {
+
+        it('should return 500 for error.statusCode, error.status and error.code', function(done){
+            var e = error.create();
+            assert(e.statusCode === 500);
+            assert(e.status === 500);
+            assert(e.code === 500);
+            done();
+        });
+    });
 });
